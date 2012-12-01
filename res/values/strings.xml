@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="layer_name">sol2</string>
+    <string name="layer_title">Sol</string>
+    
+    <string name="layar_not_available">In order to use this application, you need to have Layar Reality Browser installed.</string>
+    <string name="layar_market">Download from Android Market</string>
+    <string name="layar_cancel">Cancel</string>
+</resources>
