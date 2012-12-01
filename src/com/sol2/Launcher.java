@@ -30,6 +30,9 @@ public class Launcher extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     
+    
+    
+    
     if (! isLayarInstalled()) {
       AlertDialog.Builder dialog = new AlertDialog.Builder(this);
       dialog.setMessage(R.string.layar_not_available);
