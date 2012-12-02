@@ -3,14 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     android:orientation="vertical" >
-       <FrameLayout android:id="@+id/fragment_content"
-                 android:layout_width="match_parent"
-                 android:layout_height="0dip"
-                 android:layout_weight="1" />
-    <ListView 
-        android:id="@+id/listItems"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ToggleButton
+            android:id="@+id/homeButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/toggle"
+            android:textOn="Menu"
+            android:textOff="Menu"
+            android:textColor="@android:color/white"
+            android:layout_weight="1" />
+
+        <ToggleButton
+            android:id="@+id/addButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/toggle"
+            android:textColor="@android:color/white"
+            android:textOn="Add"
+            android:textOff="Add"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+     <ListView 
+        android:id="@+id/listItems2"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
     </ListView>

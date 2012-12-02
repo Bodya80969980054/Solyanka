@@ -12,26 +12,33 @@ public final class R {
     }
     public static final class drawable {
         public static final int atmskyiv=0x7f020000;
-        public static final int drugstoreskyiv=0x7f020001;
-        public static final int gasstationskyiv=0x7f020002;
-        public static final int icon=0x7f020003;
-        public static final int shopskyiv=0x7f020004;
+        public static final int btn_active=0x7f020001;
+        public static final int btn_not_active=0x7f020002;
+        public static final int drugstoreskyiv=0x7f020003;
+        public static final int gasstationskyiv=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int shopskyiv=0x7f020006;
+        public static final int toggle=0x7f020007;
     }
     public static final class id {
-        public static final int fragment_content=0x7f060002;
-        public static final int imageItems=0x7f060000;
-        public static final int listItems=0x7f060003;
-        public static final int nameItems=0x7f060001;
-        public static final int tab1=0x7f060005;
-        public static final int text=0x7f060004;
-        public static final int textView1=0x7f060006;
+        public static final int addButton=0x7f060009;
+        public static final int btnSend=0x7f060005;
+        public static final int homeButton=0x7f060008;
+        public static final int imageItems=0x7f060006;
+        public static final int linearlayout=0x7f060000;
+        public static final int listItems2=0x7f06000a;
+        public static final int listItemsTab=0x7f06000b;
+        public static final int longtitude=0x7f060001;
+        public static final int longtitude1=0x7f060003;
+        public static final int nameItems=0x7f060007;
+        public static final int txtDescription=0x7f060004;
+        public static final int txtTitle=0x7f060002;
     }
     public static final class layout {
-        public static final int list_items=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int row=0x7f030002;
+        public static final int addpoint=0x7f030000;
+        public static final int list_items=0x7f030001;
+        public static final int main=0x7f030002;
         public static final int tab1=0x7f030003;
-        public static final int tab2=0x7f030004;
     }
     public static final class string {
         public static final int layar_cancel=0x7f040004;
