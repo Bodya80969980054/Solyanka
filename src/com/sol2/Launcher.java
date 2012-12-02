@@ -1,21 +1,28 @@
 package com.sol2;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,38 +37,45 @@ public class Launcher extends Activity {
 	private static final String MARKET_URL = (getSdkVersion() > 5) ? "market://details?id=com.layar"
 			: "market://search?q=pname:com.layar";
 	private ListView mListitems;
-	private String[] mItems = { "atmskyiv", "drugstoreskyiv", "shopskyiv", "gasstationskyiv"  };
+	private String[] mItems = { "atmskyiv", "drugstoreskyiv", "shopskyiv",
+			"gasstationskyiv" };
 	private ItemsAdapter mAdapter;
+
+	private LocationManager locationManager;
+	private Location location;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		Intent intent = new Intent();
-//		intent.setAction(Intent.ACTION_VIEW);
-		double latitude = 50.042206;
-		double longitude = 30.17000;
-		Uri uri = Uri.parse("layar://custom.layar.nl/login.php?lon=30.933156943889342&lat=50.373196116536235");
-//		intent.setData(Uri.parse("layar://examplelayer/?action=refresh&CUSTOM_SLIDER_2=540&radius=3500"));
-		intent.setData(uri);
-		startActivity(intent);
+
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		location = locationManager.getLastKnownLocation("network");
+
 		mListitems = (ListView) findViewById(R.id.listItems);
 		mAdapter = new ItemsAdapter(Launcher.this, R.layout.list_items, mItems);
 		mListitems.setAdapter(mAdapter);
+
 		mListitems.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-//				String selectedValue = (String) getListAdapter().getItem(position);
-				Toast.makeText(Launcher.this, mItems[arg2],Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(Intent.ACTION_VIEW,
-				Uri.parse("layar://" + mItems[arg2]));
+				// String selectedValue = (String)
+				// getListAdapter().getItem(position);
+				Toast.makeText(Launcher.this, mItems[arg2], Toast.LENGTH_SHORT)
+						.show();
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse("layar://" + mItems[arg2]));
 				startActivity(intent);
-				
+
 			}
 		});
+		openLayar();
+	}
+	
+	private void openLayar() {
 		if (!isLayarInstalled()) {
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 			dialog.setMessage(R.string.layar_not_available);
@@ -89,11 +103,6 @@ public class Launcher extends Activity {
 					});
 
 			dialog.show();
-		} else {
-			// Intent intent = new Intent(Intent.ACTION_VIEW,
-			// Uri.parse("layar://" + getString(R.string.layer_name)));
-			// startActivity(intent);
-			// finish();
 		}
 	}
 
@@ -105,6 +114,23 @@ public class Launcher extends Activity {
 		} catch (NameNotFoundException e) {
 			return false;
 		}
+	}
+
+	private HashMap<String, String> parseJSONmenu(String json) {
+		HashMap<String, String> menuMap = new HashMap<String, String>();
+		JSONObject item;
+		try {
+			JSONObject jObj = new JSONObject(json);
+			jObj.length();
+			JSONArray jMenu = jObj.getJSONArray("menu");
+			for (int i = 0; i < jObj.length(); i++) {
+				item = jMenu.getJSONObject(i);
+				menuMap.put(item.getString("Name"), item.getString("URL"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return menuMap;
 	}
 
 	private boolean isMarketAvailable() {
@@ -120,5 +146,17 @@ public class Launcher extends Activity {
 		} catch (NumberFormatException e) {
 			return 1;
 		}
+	}
+
+	public float getLatitude() {
+		if (location != null)
+			return (float) (location.getLatitude());
+		return 0;
+	}
+
+	public float getLongitude() {
+		if (location != null)
+			return (float) (location.getLongitude());
+		return 0;
 	}
 }
