@@ -6,18 +6,23 @@
       android:installLocation="auto"
       >
       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+      <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
  <uses-permission android:name="android.permission.INTERNET"/>
           <uses-sdk android:targetSdkVersion="14" android:minSdkVersion="10" />
     <application android:icon="@drawable/icon" android:label="@string/layer_title">
         <activity android:name=".Launcher"
+           		  android:screenOrientation="portrait"	
                   android:label="@string/layer_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".AddPoints"
+            	  android:screenOrientation="portrait"	
+                  android:label="@string/layer_title" >
+        </activity>
     </application>
 
 

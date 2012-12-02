@@ -14,6 +14,7 @@
         android:id="@+id/nameItems"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:textSize="25dp"
         android:text="gf" />
 
 </LinearLayout>

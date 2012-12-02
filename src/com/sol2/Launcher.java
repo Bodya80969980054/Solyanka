@@ -7,13 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.LauncherActivity.ListItem;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,14 +20,11 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 /**
@@ -49,10 +41,10 @@ public class Launcher extends Activity implements OnClickListener {
 	private LocationManager locationManager;
 	private Location location;
 	private boolean flagAdd = false;
-	private String[] mItems = { "atmskyiv", "drugstoreskyiv", "shopskyiv",
+	private String[] mItems = { "atmskyiv",
 			"gasstationskyiv" };
 	private Context context;
-	private String mod;
+	public String mod;
 	private ListView mListitems;
 	private ToggleButton tb1, tb2;
 
@@ -85,6 +77,9 @@ public class Launcher extends Activity implements OnClickListener {
 				// getListAdapter().getItem(position);
 				if (flagAdd) {
 					mod = mItems[arg2];
+					Intent foo = new Intent(getApplicationContext(), AddPoints.class);
+					foo.putExtra("key", mod);
+					startActivity(foo);
 				}
 				else
 				{
@@ -132,8 +127,6 @@ public class Launcher extends Activity implements OnClickListener {
 		}
 		
 	}
-
-
 
 	private void openLayar() {
 		if (!isLayarInstalled()) {
